@@ -1,0 +1,7 @@
+package com.example.ushi_backend.entity.enums;
+
+public enum PackageType {
+    SILVER,
+    GOLD,
+    DIAMOND
+}

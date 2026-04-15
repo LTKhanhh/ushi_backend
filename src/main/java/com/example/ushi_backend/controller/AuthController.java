@@ -8,6 +8,8 @@ import com.example.ushi_backend.dto.response.ApiResponse;
 import com.example.ushi_backend.dto.response.AuthResponse;
 import com.example.ushi_backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
+@Slf4j
 public class AuthController {
 
     private final AuthService authService;
@@ -29,6 +32,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@RequestBody RegisterRequest request) {
+        log.info("Registering user");
         ApiResponse apiResponse = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
     }

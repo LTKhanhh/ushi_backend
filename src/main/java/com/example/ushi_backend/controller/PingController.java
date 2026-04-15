@@ -1,11 +1,9 @@
 package com.example.ushi_backend.controller;
 
-import com.example.ushi_backend.dto.request.RequestRegisterOtpRequest;
 import com.example.ushi_backend.dto.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

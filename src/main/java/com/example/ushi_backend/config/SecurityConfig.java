@@ -4,6 +4,7 @@ import com.example.ushi_backend.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +28,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/register/request-otp", "/auth/register", "/auth/login", "/auth/refresh", "/auth/logout").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/apartments/favorites", "/apartments/recently-viewed").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/apartments/*/favorite", "/apartments/*/recently-viewed").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/apartments", "/apartments/*", "/apartments/city/**").permitAll()
                         .requestMatchers("/users/me").hasAnyRole("ADMIN","USER")
                         .requestMatchers("/users").hasRole("ADMIN")
                         .anyRequest().authenticated()

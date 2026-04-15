@@ -1,14 +1,8 @@
 package com.example.ushi_backend.entity;
 
 import com.example.ushi_backend.entity.enums.UserRole;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,10 +35,12 @@ public class UserEntity {
     private String phone;
 
     @Column
-    private String address;
-
-    @Column
     private String avatarUrl;
+
+    @JsonIgnore
+    @OneToOne()
+    @JoinColumn(name = "address_id")
+    private AccountAddressEntity address;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
