@@ -14,7 +14,7 @@ public interface ApartmentDetailProjection {
 
     String getPackageType();
 
-    Boolean getLiked();
+    Integer getLiked();
 
     String getThumbnailImageUrl();
 
@@ -53,4 +53,14 @@ public interface ApartmentDetailProjection {
     String getStreet();
 
     String getAddressDetails();
+
+    Long getLandlordId();
+
+    String getLandlordName();
+
+    String getLandlordPhone();
+
+    String getLandlordAvatar();
+
+    Long getLandlordActivePostCount();
 }

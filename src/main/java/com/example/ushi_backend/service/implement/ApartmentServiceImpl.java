@@ -4,6 +4,7 @@ import com.example.ushi_backend.dto.response.AmenityResponse;
 import com.example.ushi_backend.dto.response.ApartmentCardResponse;
 import com.example.ushi_backend.dto.response.ApartmentDetailResponse;
 import com.example.ushi_backend.dto.response.FavoriteToggleResponse;
+import com.example.ushi_backend.dto.response.LandlordSummaryResponse;
 import com.example.ushi_backend.dto.response.ServicePriceResponse;
 import com.example.ushi_backend.entity.FavoritePostEntity;
 import com.example.ushi_backend.entity.PostEntity;
@@ -178,6 +179,13 @@ public class ApartmentServiceImpl implements ApartmentService {
                 detail.getDistrict(),
                 detail.getStreet(),
                 detail.getAddressDetails(),
+                new LandlordSummaryResponse(
+                        detail.getLandlordId(),
+                        detail.getLandlordName(),
+                        detail.getLandlordPhone(),
+                        detail.getLandlordAvatar(),
+                        detail.getLandlordActivePostCount()
+                ),
                 imageUrls,
                 amenities,
                 servicePrices

@@ -10,7 +10,7 @@ public record ApartmentDetailResponse(
         String address,
         BigDecimal price,
         String packageType,
-        Boolean liked,
+        Integer liked,
         String thumbnailImageUrl,
         String description,
         String propertyType,
@@ -30,6 +30,7 @@ public record ApartmentDetailResponse(
         String district,
         String street,
         String addressDetails,
+        LandlordSummaryResponse landlord,
         List<String> imageUrls,
         List<AmenityResponse> amenities,
         List<ServicePriceResponse> servicePrices

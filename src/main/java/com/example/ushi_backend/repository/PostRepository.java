@@ -193,8 +193,8 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
                         FROM favorite_posts fp
                         WHERE fp.post_id = p.id
                           AND fp.user_id = :userId
-                    ) THEN TRUE
-                    ELSE FALSE
+                    ) THEN 1
+                    ELSE 0
                 END AS liked,
                 (
                     SELECT pi.image_url
@@ -220,9 +220,21 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
                 c.name AS city,
                 d.name AS district,
                 pa.street AS street,
-                pa.details AS addressDetails
+                pa.details AS addressDetails,
+                l.id AS landlordId,
+                l.name AS landlordName,
+                l.phone AS landlordPhone,
+                l.avatar AS landlordAvatar,
+                (
+                    SELECT COUNT(*)
+                    FROM properties pr2
+                    JOIN posts p2 ON p2.property_id = pr2.id
+                    WHERE pr2.landlord_id = l.id
+                      AND p2.status = 'ACTIVE'
+                ) AS landlordActivePostCount
             FROM posts p
             JOIN properties pr ON pr.id = p.property_id
+            JOIN landlords l ON l.id = pr.landlord_id
             JOIN property_addresses pa ON pa.id = pr.address_id
             JOIN districts d ON d.id = pa.district_id
             JOIN cities c ON c.id = d.city_id
